@@ -11,6 +11,13 @@ a small stdlib-only helper (`skills/renew/scripts/rollover.py`) does the bookkee
 
 A JSON log of before/after metadata is written to `<hermes root>/backups/session-rollover/<date>/`.
 
+## When to use it
+
+- **Save tokens.** Every turn re-sends the whole transcript; a fresh session that starts from a short handover makes each later turn cheaper.
+- **The agent is going in circles.** When it keeps repeating the same mistake or is anchored by earlier failed attempts, a fresh session keeps the decisions and drops the noise.
+- **Pick up new skills/tools or a changed model/config.** The skills index, toolset and system prompt are frozen per session.
+- **A phase or milestone ends.** Continue the next phase in a clean session; the old one stays findable by its timestamped title.
+
 ## Why, compared with what exists
 
 | Option | What it does | Gap this fills |
