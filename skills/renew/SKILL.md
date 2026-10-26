@@ -52,7 +52,8 @@ python scripts/rollover.py rollover --self --handover <handover.md>
 
 ## Procedure
 
-1. Unless the user already said to go ahead, confirm in one sentence: the old session will be renamed `<title>_YYYYMMDDHHMM` and archived, and a handover goes to a new session with the same title.
+1. Confirm in one sentence (the old session will be renamed `<title>_YYYYMMDDHHMM` and archived, and a handover goes to a new session with the same title), unless the user already said to go ahead or typed `/renew -f` (or `/renew --yes`), which means switch immediately without asking.
+   `-f`/`--yes` is a skill-level "skip confirmation" flag only. It is **not** the script's `--force` (which overrides the active-run guard for a non-self target); never add `--force` because the user typed `-f`.
 2. Write the handover with `write_file` to `<hermes root>/backups/session-rollover/handover-<session id>.md`, 1,500-3,000 characters (hard cap 12,000), in the user's language, with these sections: Goal; Decisions (with reasons); Current state (what is done and verified); Open items (ticket/card ids, pending approvals); Files and paths (plans, branches, commits, logs); Next step; Rules and constraints the user set. Facts and decisions only, no pasted transcripts. Never include passwords, tokens, API keys or vault contents; write "stored in the vault/.env" instead. Run `dump --self` first if you need to refresh details.
 3. Dry run: `python scripts/rollover.py rollover --self --handover <file> --dry-run`. Check `self=True`, `api_key_loaded=yes` and the titles.
 4. Run the same command without `--dry-run`. Add `--lang zh-TW` for a Traditional Chinese preamble, `--title "<new>"` to retitle.

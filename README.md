@@ -11,6 +11,12 @@ a small stdlib-only helper (`skills/renew/scripts/rollover.py`) does the bookkee
 
 A JSON log of before/after metadata is written to `<hermes root>/backups/session-rollover/<date>/`.
 
+## Usage
+
+- `/renew` asks one confirmation question, then switches.
+- `/renew -f` (or `/renew --yes`) switches immediately without asking. This is a skill-level flag, separate from
+  the script's `--force` (which overrides the active-run guard).
+
 ## When to use it
 
 - **Save tokens.** Every turn re-sends the whole transcript; a fresh session that starts from a short handover makes each later turn cheaper.
